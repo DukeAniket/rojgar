@@ -43,15 +43,17 @@ app.use(xss());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.get("/api/v1", (req, res) => {
   console.log(req.signedCookies);
-  res.send("alist api v1");
+  res.send("rojgar api v1");
 });
 
 // routes start
 const authRouter = require("./routes/auth");
 const userInfoRouter = require("./routes/userInfo");
+const serviceRouter = require("./routes/service");
 app.use("/api/v1/auth", authRouter);
-// i want to protect all anime routes with authentication middleware
+// i want to protect all service routes with authentication middleware
 app.use("/api/v1/userinfo", authenticationMiddleware, userInfoRouter);
+app.use("/api/v1/service", authenticationMiddleware, serviceRouter);
 //routes end
 
 //error 50% of this project is error
