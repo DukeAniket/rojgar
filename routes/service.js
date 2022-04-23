@@ -5,14 +5,14 @@ const {
   addService,
   editService,
   getUserService,
-  getUserService,
-  getService,
+  // getService,
+  deleteService,
 } = require("../controllers/service");
 
 router.post("/add", addService);
-router.post("/edit", editService);
-router.post("/logout", logout);
-router.get("/user-service/:email", getUserService);
-router.get("/location/:state&:city", getService);
+router.patch("/edit", editService);
+router.get("/userservice", getUserService);
+//router.get("/location/:state&:city", getService);
+router.delete("/delete", deleteService);
 
 module.exports = router;
