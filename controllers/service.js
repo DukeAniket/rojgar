@@ -50,11 +50,27 @@ const deleteService = async (req, res) => {
   }
   res.status(200).json(job);
 };
-
+const getUserService = async (req, res) => {
+  console.log("fetching service for user :", req.user.userId);
+  const services = await Service.find({ userId: req.user.userId }).sort(
+    "title"
+  );
+  if (services) res.status(200).json({ services, count: services.length });
+  else throw new BadRequestError("cant find user's list");
+};
+const getService = async (req, res) => {
+  console.log("fetching service for user :", req.user.userId);
+  const services = await Service.find({
+    state: req.body.state,
+    city: req.body.city,
+  }).sort("rating");
+  if (services) res.status(200).json({ services, count: services.length });
+  else throw new BadRequestError("cant find user's list");
+};
 module.exports = {
   addService,
   editService,
   getUserService,
-  // getService,
+  getService,
   deleteService,
 };
